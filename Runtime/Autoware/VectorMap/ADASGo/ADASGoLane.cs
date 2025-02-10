@@ -61,6 +61,7 @@ namespace AutoCore.MapToolbox.Autoware
         public ADASMapLane.Type laneType = ADASMapLane.Type.STRAIGHT;
         public int limitVel = 20;
         public int refVel = 20;
+        public int isSweep = 0;         // edit by wangruifan
         public static float tempDist;
         public const float minDistance = 0.2f;
         public ADASMapLane lane;
@@ -81,6 +82,7 @@ namespace AutoCore.MapToolbox.Autoware
                     laneType = lane.LaneType;
                     limitVel = lane.LimitVel;
                     refVel = lane.RefVel;
+                    isSweep = lane.IsSweep;             // edit by wangruifan
                     transform.position = (From + To) / 2;
                 }
             }
@@ -105,7 +107,8 @@ namespace AutoCore.MapToolbox.Autoware
                         Lno = lno,
                         LaneType = laneType,
                         LimitVel = limitVel,
-                        RefVel = refVel
+                        RefVel = refVel,
+                        IsSweep = isSweep           // edit by wangruifan
                     };
                     tempDist += (To - From).magnitude;
                     if (last != null)
@@ -331,6 +334,7 @@ namespace AutoCore.MapToolbox.Autoware
             laneType = t.laneType;
             limitVel = t.limitVel;
             refVel = t.refVel;
+            isSweep = t.isSweep;            // edit by wangruifan
         }
     }
 }
