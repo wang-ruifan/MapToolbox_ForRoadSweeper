@@ -20,15 +20,15 @@
 using AutoCore.MapToolbox.PCL;
 using System.IO;
 using UnityEditor;
-using UnityEditor.Experimental.AssetImporters;
+
 using UnityEngine;
 
 namespace AutoCore.MapToolbox.Editor.PCL
 {
-    [ScriptedImporter(1, "pcd")]
-    class PointCloudImporter : ScriptedImporter
+    [UnityEditor.AssetImporters.ScriptedImporter(1, "pcd")]
+    class PointCloudImporter : UnityEditor.AssetImporters.ScriptedImporter
     {
-        public override void OnImportAsset(AssetImportContext ctx)
+        public override void OnImportAsset(UnityEditor.AssetImporters.AssetImportContext ctx)
         {
             using (var reader = new PointCloudReader(Path.Combine(Directory.GetCurrentDirectory(), ctx.assetPath)))
             {
@@ -45,7 +45,7 @@ namespace AutoCore.MapToolbox.Editor.PCL
             }
             AssetDatabase.Refresh();
         }
-        private void SaveMesh(AssetImportContext ctx, Mesh mesh)
+        private void SaveMesh(UnityEditor.AssetImporters.AssetImportContext ctx, Mesh mesh)
         {
             var go = GameObject.CreatePrimitive(PrimitiveType.Cube);
             DestroyImmediate(go.GetComponent<BoxCollider>());
