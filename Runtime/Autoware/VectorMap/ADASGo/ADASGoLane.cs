@@ -61,7 +61,7 @@ namespace AutoCore.MapToolbox.Autoware
         public ADASMapLane.Type laneType = ADASMapLane.Type.STRAIGHT;
         public int limitVel = 20;
         public int refVel = 20;
-        public int isSweep = 0;         // edit by wangruifan
+        public ADASMapLane.Sweep isSweep = ADASMapLane.Sweep.NO;        // edit by wangruifan
         public static float tempDist;
         public const float minDistance = 0.2f;
         public ADASMapLane lane;

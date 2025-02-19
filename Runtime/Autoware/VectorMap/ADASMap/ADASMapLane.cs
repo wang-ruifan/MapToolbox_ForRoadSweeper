@@ -58,7 +58,12 @@ namespace AutoCore.MapToolbox.Autoware
         public Type LaneType { get; set; }
         public int LimitVel { get; set; }
         public int RefVel { get; set; }
-        public int IsSweep { get; set; }            // edit by wangruifan
+        public enum Sweep : int
+        {
+            NO = 0,
+            YES = 1
+        }        // edit by wangruifan
+        public Sweep IsSweep { get; set; }      // edit by wangruifan
         public int RoadSecID { get; set; }
         public enum ChgFG : int
         {
@@ -241,7 +246,7 @@ namespace AutoCore.MapToolbox.Autoware
         }
         ADASMapLane GetFirstLane() => IsFirstLane() ? this : BLane.GetFirstLane();
         #endregion
-        public override string ToString() => $"{ID},{DTLane.ID},{(BLane != null ? BLane.ID : 0)},{(FLane != null ? FLane.ID : 0)},{BNode.ID},{FNode.ID},{(int)JCT},{(BLane2 != null ? BLane2.ID : 0)},{(BLane3 != null ? BLane3.ID : 0)},{(BLane4 != null ? BLane4.ID : 0)},{(FLane2 != null ? FLane2.ID : 0)},{(FLane3 != null ? FLane3.ID : 0)},{(FLane4 != null ? FLane4.ID : 0)},{ClossID},{Span},{LCnt},{Lno},{(int)LaneType},{LimitVel},{RefVel},{RoadSecID},{(int)LaneChgFG},{IsSweep}";         // edit by wangruifan
+        public override string ToString() => $"{ID},{DTLane.ID},{(BLane != null ? BLane.ID : 0)},{(FLane != null ? FLane.ID : 0)},{BNode.ID},{FNode.ID},{(int)JCT},{(BLane2 != null ? BLane2.ID : 0)},{(BLane3 != null ? BLane3.ID : 0)},{(BLane4 != null ? BLane4.ID : 0)},{(FLane2 != null ? FLane2.ID : 0)},{(FLane3 != null ? FLane3.ID : 0)},{(FLane4 != null ? FLane4.ID : 0)},{ClossID},{Span},{LCnt},{Lno},{(int)LaneType},{LimitVel},{RefVel},{RoadSecID},{(int)LaneChgFG},{(int)IsSweep}";         // edit by wangruifan
         const string file = "lane.csv";
         const string header = "LnID,DID,BLID,FLID,BNID,FNID,JCT,BLID2,BLID3,BLID4,FLID2,FLID3,FLID4,ClossID,Span,LCnt,Lno,LaneType,LimitVel,RefVel,RoadSecID,LaneChgFG,IsSweep";            // edit by wangruifan
         public static void ReadCsv(string path)
@@ -276,7 +281,7 @@ namespace AutoCore.MapToolbox.Autoware
                         RefVel = int.Parse(item[19]),
                         RoadSecID = int.Parse(item[20]),
                         LaneChgFG = (ChgFG)int.Parse(item[21]),
-                        IsSweep = int.Parse(item[22])           // edit by wangruifan
+                        IsSweep = (Sweep)int.Parse(item[22])           // edit by wangruifan
                     };
                 }
                 foreach (var item in List)
